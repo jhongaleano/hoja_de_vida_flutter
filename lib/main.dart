@@ -63,6 +63,8 @@ class DevResumePage extends StatelessWidget {
 
             // --- GRID RESPONSIVO ---
             LayoutBuilder(
+
+          
               builder: (context, constraints) {
                 int crossAxisCount = 4; // Por defecto PC
                 if (constraints.maxWidth < 600) crossAxisCount = 1; // Celular
@@ -76,15 +78,7 @@ class DevResumePage extends StatelessWidget {
                   crossAxisSpacing: 20,
                   childAspectRatio: 1.5,
                   children: [
-                    skillCard("React", "Component-based UI development.", Icons.code),
-                    skillCard("Node.js", "Scalable server-side logic.", Icons.terminal),
-                    skillCard("PostgreSQL", "Complex querying and data modeling.", Icons.storage),
-                    skillCard("TypeScript", "Writing robust, type-safe code.", Icons.verified_user),
-                    skillCard("AWS", "Cloud infrastructure and S3.", Icons.cloud),
-                    skillCard("UI Design", "Prototyping in Figma.", Icons.edit),
-                    skillCard("Docker", "Containerization and CI/CD.", Icons.settings_input_component),
-                    skillCard("Python", "Scripting and data analysis.", Icons.bolt),
-                    skillCard("React", "Component-based UI development.", Icons.code),
+                    skillCard("React", "Component-based UI development.", Icons.code_off_rounded),
                     skillCard("Node.js", "Scalable server-side logic.", Icons.terminal),
                     skillCard("PostgreSQL", "Complex querying and data modeling.", Icons.storage),
                     skillCard("TypeScript", "Writing robust, type-safe code.", Icons.verified_user),
@@ -96,7 +90,14 @@ class DevResumePage extends StatelessWidget {
                 );
               },
             ),
+          
+            isMobile ? Column(children: [const HeroContact()]): Row(
+                children: const [
+                    Expanded(child: HeroContact()),
+                  ],
+                ),
           ],
+          
         ),
       ),
     );
@@ -111,7 +112,7 @@ class DevResumePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade200),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 5))
+          BoxShadow(color: Colors.black.withAlpha(2), blurRadius: 10, offset: const Offset(0, 5))
         ],
       ),
       child: Column(
@@ -138,8 +139,8 @@ class HeroText extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(color: Colors.blue.shade50, borderRadius: BorderRadius.circular(5)),
-          child: const Text("SOFTWARE ENGINEER", style: TextStyle(color: Colors.blue, fontSize: 10, fontWeight: FontWeight.bold)),
+          decoration: BoxDecoration(color: const Color.fromARGB(106, 210, 146, 223), borderRadius: BorderRadius.circular(5)),
+          child: const Text("INGENIERO DE SOFTWARE", style: TextStyle(color: Color.fromARGB(255, 136, 6, 125), fontSize: 10, fontWeight: FontWeight.bold)),
         ),
         const SizedBox(height: 20),
         const Text("Building the\nfuture of the web.", 
@@ -152,7 +153,7 @@ class HeroText extends StatelessWidget {
           children: [
             ElevatedButton(onPressed: () {}, child: const Text("Get In Touch") ),
             const SizedBox(width: 15),
-            OutlinedButton(onPressed: () {}, child: const Text("View Projects")),
+            OutlinedButton(onPressed: () {},style: OutlinedButton.styleFrom(backgroundColor: const Color.fromARGB(195, 68, 113, 190)) , child: const Text("View Projects",style: TextStyle(color: Colors.white),)),
           ],
         ),
       ],
@@ -186,5 +187,44 @@ class HeroImage extends StatelessWidget {
        
       ),
       );
+  }
+}
+
+class HeroContact extends StatelessWidget{
+  const HeroContact ({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+          margin: EdgeInsets.only(top: 60,bottom: 35),
+          padding: const EdgeInsets.all(45),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(color: Colors.black.withAlpha(20)),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withAlpha(2), blurRadius: 10, offset: const Offset(0, 5))
+            ],
+          ),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            Text("Let's build something\n          extraordinary together.",style:TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 20),
+              Text("Currently available for select freelance opportunities and full-time positions. I'd love to hear about your project.",style:TextStyle(fontSize: 16)),
+              const SizedBox(height: 35),
+              Row(
+                children: [
+                  ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(106, 210, 146, 223)), child: const Text("GitHub",style: TextStyle(color: Colors.white))),
+                  const SizedBox(width: 35),
+                  ElevatedButton(onPressed: (){}, child: const Text("Linkedln"))
+
+
+                ],
+              )
+            ],
+          ),
+    );
   }
 }
